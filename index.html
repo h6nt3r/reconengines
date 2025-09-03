@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dork Search</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container mb-3 p-3 rounded">
+  <div class="row">
+      <div class="col-12">
+        <h2>All in one dorks!</h2>
+      </div>
+  </div>
+      
+  <div class="row mb-3 search-section">
+    <div class="col-12 col-md-2">
+      <label class="form-label" for="engine">Select a search engine</label>
+      <select id="engine" class="form-select" aria-label="Search engine selection">
+        <option value="">-- Select --</option>
+        <option value="https://www.google.com/search?q=">Google</option>
+        <option value="https://github.com/search?q=">Github</option>
+        <option value="https://fofa.info/result?q=">Fofa</option>
+        <option value="https://www.shodan.io/search?query=">Shodan</option>
+        <option value="https://www.bing.com/search?q=">Bing</option>
+        <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+        <option value="https://yandex.com/search/?text=">Yandex</option>
+        <option value="https://leakix.net/search?q=">Leakix</option>
+        <option value="https://www.postman.com/search?q=">Postman</option>
+        <option value="https://www.startpage.com/do/dsearch?query=">Startpage</option>
+        <option value="https://www.refseek.com/search?q=">Refseek</option>
+      </select>
+    </div>
+
+<div class="col-12 col-md-3 position-relative">
+  <label class="form-label" for="domain">Domain to search</label>
+  <input type="text" id="domain" class="form-control pe-5" placeholder="example.com" aria-label="Domain input">
+  <button type="button" class="btn btn-sm btn-clear" id="clear-domain" aria-label="Clear domain">&times;</button>
+</div>
+
+<div class="col-12 col-md-7 position-relative">
+  <label class="form-label" for="dorkLink">Dork link</label>
+  <input type="text" id="dorkLink" class="form-control pe-5" placeholder="https://raw.githubusercontent.com/h6nt3r/collection_payloads/refs/heads/main/git-dorks.txt" aria-label="Dork link input">
+  <button type="button" class="btn btn-sm btn-clear" id="clear-dorkLink" aria-label="Clear dork link">&times;</button>
+</div>
+    <div class="col-12 my-2 text-center">
+      <button type="button" class="btn btn-outline-warning" aria-label="Generate search queries">Generate</button>
+      <button type="button" class="btn btn-outline-danger" aria-label="Reset inputs">Reset</button>
+    </div>
+  </div>
+  <div class="row mb-3" id="generated-dorks">
+    <div class="col-12">
+      <h4>Generated Dorks</h4>
+      <div id="dork-list" class="d-none"></div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
