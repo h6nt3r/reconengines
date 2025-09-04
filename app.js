@@ -1,76 +1,95 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+  const generateBtn = document.querySelector(".btn-outline-warning");
+  const resetBtn = document.querySelector(".btn-outline-danger");
   const engineSelect = document.getElementById("engine");
   const domainInput = document.getElementById("domain");
   const dorkLinkInput = document.getElementById("dorkLink");
-  const generateBtn = document.querySelector(".btn-outline-warning");
-  const resetBtn = document.querySelector(".btn-outline-danger");
   const dorkList = document.getElementById("dork-list");
+  const clearDomainBtn = document.getElementById("clear-domain");
+  const clearDorkLinkBtn = document.getElementById("clear-dorkLink");
 
-  // Clear buttons
-  document.getElementById("clear-domain").addEventListener("click", () => {
+  // Clear input buttons
+  clearDomainBtn.addEventListener("click", () => {
     domainInput.value = "";
   });
 
-  document.getElementById("clear-dorkLink").addEventListener("click", () => {
+  clearDorkLinkBtn.addEventListener("click", () => {
     dorkLinkInput.value = "";
   });
 
-  // Generate button logic
-  generateBtn.addEventListener("click", async () => {
-    const engine = engineSelect.value.trim();
+  // Generate dorks
+  generateBtn.addEventListener("click", function () {
+    const engine = engineSelect.value;
     const domain = domainInput.value.trim();
     const dorkLink = dorkLinkInput.value.trim();
 
-    // Validation: do not clear other fields if one is empty
     if (!engine || !domain || !dorkLink) {
-      alert("Please fill in all fields before generating!");
+      alert("Please fill all fields!");
       return;
     }
 
-    try {
-      const response = await fetch(dorkLink);
-      if (!response.ok) throw new Error("Failed to fetch dorks");
-      const text = await response.text();
-      const lines = text.split(/\r?\n/).filter(line => line.trim() !== "");
+    fetch(dorkLink)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch dorks list.");
+        }
+        return response.text();
+      })
+      .then((data) => {
+        const dorks = data.split("\n").filter((line) => line.trim() !== "");
+        dorkList.innerHTML = "";
 
-      dorkList.innerHTML = "";
-      lines.forEach(line => {
-        const query = line.replace(/example\.com/g, domain);
+        dorks.forEach((dork) => {
+        // 🔥 Replace example.com with actual domain input
+        const replacedDork = dork.replace(/example\.com/gi, domain);
 
-        // wrapper div
         const wrapper = document.createElement("div");
-        wrapper.className = "dork-item d-flex align-items-center mb-2";
+        wrapper.className = "dork-item";
 
-        // checkbox
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.className = "form-check-input me-2";
 
-        // link
         const link = document.createElement("a");
-        link.href = engine + encodeURIComponent(query);
+        link.href = engine + encodeURIComponent(replacedDork);
         link.target = "_blank";
-        link.className = "btn btn-option flex-grow-1";
-        link.textContent = query;
+        link.textContent = replacedDork;
 
-        // assemble
         wrapper.appendChild(checkbox);
         wrapper.appendChild(link);
+
+        // ✅ Whole row toggles checkbox (except link/checkbox itself)
+        wrapper.addEventListener("click", (e) => {
+          if (e.target.tagName !== "INPUT" && e.target.tagName !== "A") {
+            checkbox.checked = !checkbox.checked;
+          }
+        });
+
         dorkList.appendChild(wrapper);
       });
 
-      dorkList.classList.remove("d-none");
-    } catch (err) {
-      alert("Error: " + err.message);
-    }
+        dorkList.classList.remove("d-none");
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
   });
 
-  // Reset button logic
-  resetBtn.addEventListener("click", () => {
+  // Reset inputs
+  resetBtn.addEventListener("click", function () {
     engineSelect.value = "";
     domainInput.value = "";
     dorkLinkInput.value = "";
     dorkList.innerHTML = "";
     dorkList.classList.add("d-none");
+  });
+
+  // ✅ Check the checkbox when link is clicked, while still opening normally
+  document.addEventListener("click", function (e) {
+    if (e.target.tagName === "A" && e.target.closest(".dork-item")) {
+      let checkbox = e.target.closest(".dork-item").querySelector('input[type="checkbox"]');
+      if (checkbox) {
+        checkbox.checked = true;
+      }
+    }
   });
 });
