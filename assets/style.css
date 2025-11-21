@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+body {
+    background: #0a0a0f;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
+    overflow-x: hidden;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+}
+
+.container {
+    background: #1a1a1f;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    width: 100%;
+    padding: 20px;
+}
+
+h2, h4 { text-align: center; font-weight: 600; }
+h4 { margin: -12px 0px 10px 0px; }
+
+.form-control, .form-select {
+    background-color: #2b2b33;
+    border: 1px solid #444;
+    color: #fff;
+}
+
+.form-control:focus, .form-select:focus {
+	border-color: #fff;
+	box-shadow: 0 0 5px #fff;
+	background-color: #2b2b33;
+	color: #fff;
+}
+
+.form-control::placeholder { color: #aaa; }
+
+.search-section { background-color: #141414; border-radius: 10px; padding: 5px; }
+
+.btn-clear {
+    position: absolute;
+    top: 70%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1.8rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-clear:hover { color: #fff; }
+
+.dork-type-column { width: 30%; padding-right: 10px; }
+.dork-input-column { width: 70%; position: relative; }
+
+.dork-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #2b2b33;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.dork-item:hover { box-shadow: 0 0 5px #fff; background: #2b2b33; }
+.dork-item a { color: #fff; text-decoration: none; flex-grow: 1; }
+.dork-item input[type="checkbox"] { cursor: pointer; }

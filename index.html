@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dork Search</title>
+<link href="./assets/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+<div class="container mb-3 p-3 rounded">
+  <div class="row">
+    <div class="col-12">
+      <h2>All in one dorks!</h2>
+    </div>
+  </div>
+
+  <div class="row mb-3 search-section">
+    <!-- Column 1: Search Engine -->
+    <div class="col-12 col-md-2">
+      <label class="form-label" for="engine">Select a search engine</label>
+      <select id="engine" class="form-select">
+        <option value="">-- Select --</option>
+        <option value="https://www.google.com/search?q=">Google</option>
+        <option value="https://www.shodan.io/search?query=">Shodan</option>
+        <option value="https://fofa.info/result?q=">FoFa</option>
+        <option value="https://hunter.how/list?searchValue=">Hunter How</option>
+        <option value="https://github.com/search?q=">Github</option>
+        <option value="https://search.censys.io/search/getting-started?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=">Censys</option>
+        <option value="https://www.bing.com/search?q=">Bing</option>
+        <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+        <!-- <option value="https://www.virustotal.com/vtapi/v2/domain/report?apikey=">VirousTotal</option> -->
+      </select>
+    </div>
+
+    <!-- Column 2: Domain Input -->
+    <div class="col-12 col-md-3 position-relative">
+      <label class="form-label" for="domain">Domain to search</label>
+      <input type="text" id="domain" class="form-control pe-5" placeholder="example.com">
+      <button type="button" class="btn btn-sm btn-clear" id="clear-domain">&times;</button>
+    </div>
+
+    <!-- Column 3: Dork Type & Link Input -->
+    <div class="col-12 col-md-7 d-flex">
+      <div class="dork-type-column">
+        <label class="form-label" for="dorkType">Select Dork Type</label>
+        <select id="dorkType" class="form-select">
+          <option value="">-- Select --</option>
+          <option value="google">Google Dorks</option>
+          <option value="shodan">Shodan Dorks</option>
+          <option value="fofa">FoFa Dorks</option>
+          <option value="censys">Censys</option>
+          <option value="hunter">Hunter Dorks</option>
+          <option value="git">GitHub Dorks</option>
+        </select>
+      </div>
+      <div class="dork-input-column position-relative">
+        <label class="form-label" for="dorkLink">Dork link</label>
+        <input type="text" id="dorkLink" class="form-control pe-5" placeholder="Paste URL">
+        <button type="button" class="btn btn-sm btn-clear" id="clear-dorkLink">&times;</button>
+      </div>
+    </div>
+
+    <div class="col-12 my-2 text-center">
+      <button type="button" class="btn btn-outline-warning">Generate</button>
+      <button type="button" class="btn btn-outline-danger">Reset</button>
+    </div>
+  </div>
+
+  <div class="row mb-3" id="generated-dorks">
+    <div class="col-12">
+      <h4>Generated Dorks</h4>
+      <div id="dork-list" class="d-none"></div>
+    </div>
+  </div>
+</div>
+<script src="./assets/bootstrap.bundle.min.js"></script>
+<script src="./assets/app.js"></script>
+</body>
+</html>
